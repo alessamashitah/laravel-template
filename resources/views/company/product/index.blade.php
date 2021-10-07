@@ -38,8 +38,8 @@
                         <img src="{{ asset('/storage/product/'.$product->image) }}" width="50px;" height="50px;" alt="">
                         </td>
                         <td>{{$product->qty}}</td>
-                        <td><a href="" type="button" class="btn btn-dark">Edit</a></td>
-                        <td><a href="" type="button" class="btn btn-danger">Delete</a></td>
+                        <td><a href="{{route('productEdit', $product)}}" type="button" class="btn btn-dark">Edit</a></td>
+                        <td><a href="{{route('productDelete', $product)}}" type="button" class="btn btn-danger">Delete</a></td>
                         </tr>
                         @endforeach
                     </tbody>
