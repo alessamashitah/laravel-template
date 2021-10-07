@@ -11,7 +11,7 @@ class Component extends Model
 
     protected $fillable = [
         'id',
-        'name',
+        'component_name_id',
         'description',
     ];
 
@@ -23,6 +23,11 @@ class Component extends Model
     public function Products()
     {
         return $this->hasMany(Product::class);
+    }
+
+    public function componentName()
+    {
+        return $this->belongsTo(Component_name::class, 'component_name_id');
     }
     
 }
