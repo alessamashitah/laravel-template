@@ -15,9 +15,12 @@ class CreateComponentsTable extends Migration
     {
         Schema::create('components', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->unsignedInteger('component_name_id')->nullable();
             $table->string('description');
             $table->timestamps();
+
+            $table->foreign('component_name_id')->references('id')->on('component_names')->onDelete('cascade');
+            
         });
     }
 
