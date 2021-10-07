@@ -12,7 +12,7 @@
 
                 
                 <div class="card-body">
-                <a href="" type="button" class="btn btn-dark">Component</a>
+                <a href="{{route('componentIndex')}}" type="button" class="btn btn-dark">Component</a>
                 </div>
                 
             </div>
