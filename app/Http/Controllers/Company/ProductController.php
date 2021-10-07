@@ -44,4 +44,37 @@ class ProductController extends Controller
             'alert-message'=> 'New product has been added'
         ]);
     }
+
+    public function edit(product $product)
+    {
+        $product = Product::all();
+        
+        return view('company.product.edit', compact('product'));
+
+        //return view('motorcycle.edit',compact('motorcycle'));
+    }
+
+    public function update(Request $request, product $product)
+    {
+        $product->$request->name;
+        $product->$request->image;
+        $product->$request->qty;
+        $product->save();
+
+        return redirect()->route('productIndex')->with([
+            'alert-type' => 'alert-primary',
+            'alert-message'=> 'New product has been updated'
+        ]);
+    }
+
+    public function delete(product $product)
+    {
+        $product->delete();
+
+        return redirect()->route('productIndex')->with([
+            'alert-type' => 'alert-danger',
+            'alert-message'=> 'New product has been deleted'
+        ]);
+    }
+
 }
