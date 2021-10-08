@@ -21,11 +21,7 @@
                     </select>
                 </div>
                                     
-                <div class="mb-3">
-                    <label for="description" class="form-label">Description</label>
-                    <input type="description" name="description" class="form-control" id="description" placeholder="">
-                </div>
-
+                
                 <button type="submit" class="btn btn-light">Submit</button>
                 </form>   
                 </div>
