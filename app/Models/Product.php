@@ -16,8 +16,11 @@ class Product extends Model
         'qty',
     ];
 
-    public function Components()
+    public function components()
     {
-        return $this->hasMany(Component::class);
+        return $this->belongsToMany(Component::class,'component_product');
     }
+
+    
+    
 }
