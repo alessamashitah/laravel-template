@@ -11,23 +11,19 @@ class Component extends Model
 
     protected $fillable = [
         'id',
-        'component_name_id',
+        'name',
         'description',
     ];
 
-    public function Suppliers()
+    public function Users()
     {
-        return $this->hasMany(Supplier::class);
+        return $this->belongsToMany(User::class,'component_user');
     }
 
-    public function Products()
+    public function products()
     {
-        return $this->hasMany(Product::class);
+        return $this->belongsToMany(Product::class,'component_product');
     }
 
-    public function componentName()
-    {
-        return $this->belongsTo(Component_name::class, 'component_name_id');
-    }
     
 }
