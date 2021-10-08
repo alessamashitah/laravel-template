@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Company;
 
 use App\Models\Product;
+use App\Models\Component;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
@@ -12,23 +13,29 @@ class ProductController extends Controller
 {
     public function index()
     {
+        $component = Component::get();
         $product = Product::all();
+
+        // $product = Product::findOrfail($product_id);
+        // $components = Component::with('product')->where('product_id',$product_id)->get();
+
     
-        return view('company.product.index',compact('product'));
+        return view('company.product.index',compact('product',));
     }
 
     public function create()
     {
-        return view('company.product.add');
+        $component = Component::get();
+        return view('company.product.add',compact('component'));
     }
 
     public function store(Request $request)
     {
         //STORE GUNA RELATIONSHIP
         $product = new Product();
-        $product->name= $request->name;
+        $product->name = $request->name;
         $product->save(); 
-        //dd($request->file());
+        
         if($request->hasFile('file'))
         {
             $filename = $request->file->getClientOriginalName();
@@ -37,7 +44,11 @@ class ProductController extends Controller
             $product->save();
         }
         $product->qty = $request->qty;
-        $product->save(); 
+        $product->save();
+        $component = Component::find($request->name);
+        
+
+        $product->products()->attach($component); 
 
         return redirect()->route('productIndex')->with([
             'alert-type' => 'alert-primary',
@@ -45,20 +56,20 @@ class ProductController extends Controller
         ]);
     }
 
-    public function edit(product $product)
+    public function edit(Product $product)
     {
-        $product = Product::all();
+        //$product = Product::all();
         
         return view('company.product.edit', compact('product'));
 
         //return view('motorcycle.edit',compact('motorcycle'));
     }
 
-    public function update(Request $request, product $product)
+    public function update(Request $request, Product $product)
     {
-        $product->$request->name;
-        $product->$request->image;
-        $product->$request->qty;
+        $product->name = $request->name;
+        $product->image = $request->image;
+        $product->qty = $request->qty;
         $product->save();
 
         return redirect()->route('productIndex')->with([
