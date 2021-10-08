@@ -4,31 +4,31 @@ namespace App\Http\Controllers\Supplier;
 
 use App\Models\Component;
 use Illuminate\Http\Request;
-use App\Models\Component_name;
 use App\Http\Controllers\Controller;
 
 class ComponentController extends Controller
 {
     public function index()
     {
-        $component = Component::all();
+        $user = auth()->user();
+        $components = $user->Components; //RELATIONSHIP ANTARA COMPONENT DGN USER
     
-        return view('supplier.component.index',compact('component'));
+        return view('supplier.component.index',compact('components'));
     }
 
     public function create()
     {
-        $name = Component_name::all();
+        
         return view('supplier.component.add',compact('name'));
     }
 
     public function store(Request $request)
     {
         //STORE GUNA RELATIONSHIP
-        $component = new Component();
-        $component->component_name_id = $request->name;
-        $component->description = $request->description;
-        $component->save(); 
+        $supplier = auth()->user();
+        $component = Component::find($request->name);
+        $supplier ->Components()->attach($component);
+
        
 
         return redirect()->route('componentIndex')->with([
@@ -37,20 +37,19 @@ class ComponentController extends Controller
         ]);
     }
 
-    public function edit(component $component)
+    public function edit(Component $component)
     {
-        $component = Component::all();
-        $name = Component_name::all();
+      
         
-        return view('supplier.component.edit', compact('component','name'));
+        return view('supplier.component.edit', compact('component'));
 
         //return view('motorcycle.edit',compact('motorcycle'));
     }
 
-    public function update(Request $request, component $component)
+    public function update(Request $request, Component $component)
     {
-        $component->component_name_id->$request->name;
-        $component->$request->description;
+        $component->name = $request->name;
+        $component->description = $request->description;
         $component->save();
 
         return redirect()->route('componentIndex')->with([
@@ -59,9 +58,9 @@ class ComponentController extends Controller
         ]);
     }
 
-    public function delete(component $component)
+    public function delete(Component $component)
     {
-        $component->delete();
+        $component->Users()->detach();
 
         return redirect()->route('componentIndex')->with([
             'alert-type' => 'alert-danger',
