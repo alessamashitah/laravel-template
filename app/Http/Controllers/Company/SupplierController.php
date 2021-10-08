@@ -9,8 +9,7 @@ class SupplierController extends Controller
 {
     public function index()
     {
-        
     
-        return view('company.product.supplier');
+        return view('company.supplier.index');
     }
 }
