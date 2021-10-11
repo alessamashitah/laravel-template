@@ -12,14 +12,11 @@
 
                 
                 <div class="card-body">
-                <a href="{{route('componentIndex')}}" type="button" class="btn btn-dark">Component</a><br>
-                
+                <a href="{{route('componentIndex')}}" type="button" class="btn btn-dark">Component</a>
+                <a href="{{route('productIndex') }}" type="button" class="btn btn-dark">Product</a>
                 </div>
 
-                <div class="card-body">
-                <a href="" type="button" class="btn btn-dark">Product</a>
-                </div>
-                
+               
             </div>
         </div>
     </div>
