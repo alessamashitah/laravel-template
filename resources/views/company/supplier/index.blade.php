@@ -11,8 +11,12 @@
                 </div>
             @endif
             <div class="card">
-                <div class="card-header">{{ __('List of Suppliers') }}</div>
+                <div class="card-header">{{ __('Dashboard') }}</div>
 
+                <!-- <div class="card-body">
+                <a href="{{ route('componentAdd')}}" type="button" class="btn btn-dark">Add Component</a>
+                <a href="{{ route('home')}}" type="button" class="btn btn-dark">Back</a>
+                </div> -->
                
 
                 <div class="card-body">
@@ -21,11 +25,21 @@
                         <tr>
                         <th scope="col">#</th>
                         <th scope="col">Name</th>
-                        
+                        <th scope="col">Supplier</th>
+                        <th scope="col">Action</th>
                         </tr>
                     </thead>
-                  
-                </table>
+                    <tbody>
+                        @foreach($components as $key=>$component)
+                        <tr>
+                        <th scope="row">{{ $key + 1}}</th>
+                        <td>{{$component->name}}</td>
+                        <td>{{$component->Users->first()->name}}</td>
+                        <td><a href="{{route('componentDelete', $component)}}" type="button" class="btn btn-danger">Delete</a></td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                    </table>
                 </div>
             </div>
         </div>
