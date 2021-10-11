@@ -27,6 +27,14 @@
                     <input type="qty" name="qty" class="form-control" id="qty" value="{{ $product->qty }}" placeholder="qty">
                 </div>
 
+                <div class="mb-3">
+                    <label for="qty" class="form-label">Components :</label>
+                    @foreach($components as $component)
+                        <label><input type="checkbox" name="component[]" value="{{$component->id}}">{{$component->name}}</label>
+                    @endforeach           
+                </div>
+
+
                 <button type="submit" class="btn btn-light">Submit</button>
                 </form>   
                 </div>
