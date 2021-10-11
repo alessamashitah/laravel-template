@@ -28,27 +28,10 @@
                 </div>
 
                 <div class="mb-3">
-                <label for="qty" class="form-label">Components :</label>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                    <label class="form-check-label" name="component" for="flexCheckDefault">
-                        Kertas
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                    <label class="form-check-label" name="component" for="flexCheckChecked">
-                        Plastik
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                    <label class="form-check-label" name="component" for="flexCheckChecked">
-                        Kayu
-                    </label>
-                </div>
-                
-                
+                    <label for="qty" class="form-label">Components :</label>
+                    @foreach($components as $component)
+                        <label><input type="checkbox" name="component[]" value="{{$component->id}}">{{$component->name}}</label>
+                    @endforeach           
                 </div>
 
                 <button type="submit" class="btn btn-light">Submit</button>
