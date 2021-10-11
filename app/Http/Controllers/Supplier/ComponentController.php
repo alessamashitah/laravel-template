@@ -18,7 +18,7 @@ class ComponentController extends Controller
 
     public function create()
     {
-        
+       $name = Component::all();
         return view('supplier.component.add',compact('name'));
     }
 
