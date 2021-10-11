@@ -15,6 +15,7 @@
 
                 <div class="card-body">
                 <a href="{{ route('componentAdd')}}" type="button" class="btn btn-dark">Add Component</a>
+                <a href="{{ route('supplier.home')}}" type="button" class="btn btn-dark">Back</a> 
                 </div>
                
 
