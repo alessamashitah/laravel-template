@@ -11,22 +11,21 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $component = Component::get();
-        $product = Product::all();
-
-        // $product = Product::findOrfail($product_id);
-        // $components = Component::with('product')->where('product_id',$product_id)->get();
+        
+        $products = Product::with('components')->get();
+        // dd($products);
+       
 
     
-        return view('company.product.index',compact('product',));
+        return view('company.product.index',compact('products'));
     }
 
     public function create()
     {
-        $component = Component::get();
-        return view('company.product.add',compact('component'));
+        $components = Component::all();
+        return view('company.product.add',compact('components'));
     }
 
     public function store(Request $request)
@@ -45,10 +44,14 @@ class ProductController extends Controller
         }
         $product->qty = $request->qty;
         $product->save();
-        $component = Component::find($request->name);
         
-
-        $product->products()->attach($component); 
+        // dd($request->component);
+        
+        for($i=0; $i<count($request->component); $i++)
+                {
+                $component = Component::find($request->component[$i]);
+                $product->components()->attach($component);
+                }
 
         return redirect()->route('productIndex')->with([
             'alert-type' => 'alert-primary',
@@ -59,8 +62,9 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         //$product = Product::all();
+        $components = Component::all();
         
-        return view('company.product.edit', compact('product'));
+        return view('company.product.edit', compact('product','components'));
 
         //return view('motorcycle.edit',compact('motorcycle'));
     }
@@ -71,6 +75,12 @@ class ProductController extends Controller
         $product->image = $request->image;
         $product->qty = $request->qty;
         $product->save();
+
+        for($i=0; $i<count($request->component); $i++)
+                {
+                $component = Component::find($request->component[$i]);
+                $product->components()->attach($component);
+                }
 
         return redirect()->route('productIndex')->with([
             'alert-type' => 'alert-primary',
