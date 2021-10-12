@@ -27,7 +27,7 @@ Route::get('admin/home', [App\Http\Controllers\HomeController::class, 'index'])-
 Route::get('/product/index', [App\Http\Controllers\Company\ProductController::class, 'index'])->name('productIndex');
 Route::get('/product/add', [App\Http\Controllers\Company\ProductController::class, 'create'])->name('productAdd');
 Route::post('product/store', [App\Http\Controllers\Company\ProductController::class, 'store'])->name('productStore'); 
-Route::get('product/edit/{product}', [App\Http\Controllers\Company\ProductController::class, 'edit'])->name('productEdit');
+Route::get('product/edit/{product:uuid}', [App\Http\Controllers\Company\ProductController::class, 'edit'])->name('productEdit');
 Route::post('product/update/{product}', [App\Http\Controllers\Company\ProductController::class, 'update'])->name('productUpdate');  
 Route::get('product/delete/{product}', [App\Http\Controllers\Company\ProductController::class, 'delete'])->name('productDelete');
 
@@ -42,4 +42,6 @@ Route::get('/component/add', [App\Http\Controllers\Supplier\ComponentController:
 Route::post('/component/store', [App\Http\Controllers\Supplier\ComponentController::class, 'store'])->name('componentStore');
 Route::get('component/edit/{component}', [App\Http\Controllers\Supplier\ComponentController::class, 'edit'])->name('componentEdit');
 Route::post('component/update/{component}', [App\Http\Controllers\Supplier\ComponentController::class, 'update'])->name('componentUpdate');
-Route::get('component/delete/{component}', [App\Http\Controllers\Supplier\ComponentController::class, 'delete'])->name('componentDelete'); 
+Route::get('component/delete/{component}', [App\Http\Controllers\Supplier\ComponentController::class, 'delete'])->name('componentDelete');
+
+//PRODUCT
