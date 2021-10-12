@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'id',
@@ -23,7 +23,7 @@ class Product extends Model
         return $this->belongsToMany(Component::class,'component_product');
     }
 
-    use SoftDeletes;
+  
 
     
     
