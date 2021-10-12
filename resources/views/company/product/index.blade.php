@@ -14,7 +14,9 @@
                 <div class="card-header">{{ __('Dashboard') }}</div>
 
                 <div class="card-body">
+                    @can('addProduct', auth()->user())
                 <a href="{{ route('productAdd')}}" type="button" class="btn btn-dark">Add Product</a>
+                    @endcan
                 <a href="{{ route('home')}}" type="button" class="btn btn-dark">Back</a>
                 </div>
                
@@ -45,7 +47,9 @@
                             {{$component->name}},
                             @endforeach
                             </td>
+                            @can('updateProduct', auth()->user())
                         <td><a href="{{route('productEdit', $product)}}" type="button" class="btn btn-dark">Edit</a></td>
+                            @endcan
                         <td><a href="{{route('productDelete', $product)}}" type="button" class="btn btn-danger">Delete</a></td>
                         </tr>
                         @endforeach
