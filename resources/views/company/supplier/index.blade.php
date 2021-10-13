@@ -13,10 +13,10 @@
             <div class="card">
                 <div class="card-header">{{ __('Dashboard') }}</div>
 
-                <!-- <div class="card-body">
+                <div class="card-body">
                 <a href="{{ route('componentAdd')}}" type="button" class="btn btn-dark">Add Component</a>
                 <a href="{{ route('home')}}" type="button" class="btn btn-dark">Back</a>
-                </div> -->
+                </div>
                
 
                 <div class="card-body">
