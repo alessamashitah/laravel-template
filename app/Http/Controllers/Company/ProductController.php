@@ -15,10 +15,6 @@ class ProductController extends Controller
     {
         
         $products = Product::with('components')->get();
-        // dd($products);
-       
-
-    
         return view('company.product.index',compact('products'));
     }
 
@@ -30,17 +26,21 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|max:50',
+            'file' => 'required|mimes:jpg,jpeg,png,gif',
+            'qty' => 'required|integer|max:100',
+        ]);
+
         //STORE GUNA RELATIONSHIP
         $product = new Product();
-        $product->name = $request->name;
-        $product->save(); 
+        $product->name = $request->name; 
         
         if($request->hasFile('file'))
         {
             $filename = $request->file->getClientOriginalName();
             Storage::disk('public')->put('product/'.$filename, File::get($request->file));
             $product->image = $filename;
-            $product->save();
         }
         $product->qty = $request->qty;
         $product->save();
@@ -97,5 +97,21 @@ class ProductController extends Controller
             'alert-message'=> 'New product has been deleted'
         ]);
     }
+
+
+    //MASS ASSIGNMENT
+    // $productImage;
+    //     if($request->hasFile('file'))
+    //     {
+    //         $filename = $request->file->getClientOriginalName();
+    //         Storage::disk('public')->put('product/'.$filename, File::get($request->file));
+    //         $productImage = $filename;
+        
+    //     }
+    //     Product::create([
+    //         'name'=> $request->name,
+    //         'qty' => $request->qty,
+    //         'image' => $productImage,
+    //     ]);
 
 }
