@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('password')->nullable();
             $table->boolean('is_admin')->nullable();
             $table->string('google_id')->nullable();
+            $table->string('github_id')->nullable();
             $table->string('avatar')->nullable();
             $table->string('avatar_original')->nullable();
             $table->rememberToken();
