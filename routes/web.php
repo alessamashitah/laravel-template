@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/redirect', [App\Http\Controllers\GoogleController::class, 'redirectToProvider']);
 Route::get('/callback', [App\Http\Controllers\GoogleController::class, 'handleProviderCallback']);
 
+Route::get('auth/github', [App\Http\Controllers\GithubController::class, 'redirectToProvider']);
+Route::get('github/callback', [App\Http\Controllers\GithubController::class, 'handleProviderCallback']);
+
 Route::get('/', function () {
     return view('welcome');
 });
